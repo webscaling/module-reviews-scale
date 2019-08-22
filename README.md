@@ -2,12 +2,16 @@
 
 Built using React, the Shazamazon reviews component is one part of a larger Amazon clone. The component is able to render an average rating, as well as list reviews and and associated data based on a single item ID. In addition to the text and rating for reviews, data like photo submission and helpful count is also available. 
 
+
+
 ## Stack
 
 This component is built with the following technologies:
 -React to build out the front end
 -Express for the server, and body-parser to parse routes
 -MongoDB for the database, Mongoose to interface with the DB
+
+
 
 ## Getting Started
 1. Install NPM packages:
@@ -27,10 +31,14 @@ npm run server
 npm start
 ```
 
+
+
 If you would like, you can skip step four and run live-server if it is installed in your machine in order to track changes live. To do this, make sure you have live-server installed globally on your machine (npm install live-server -g) and then run the following script.
 ```
 npm run live-server
 ```
+
+
 
 ## User stories
 
