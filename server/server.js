@@ -33,9 +33,9 @@ app.all('/test', (req, res) => {
 
 app.all('/seed', (req, res) => {
   //Seed
-  for(var i = 0; i < 100; i++){
+  for(var i = 0; i < 1000; i++){
       let rating = Math.floor((Math.random() * 5) + 1)
-      let itemID = Math.floor((Math.random() * 1000) + 1)
+      let itemID = Math.floor((Math.random() * 100) + 1)
       let hipsum = 'Snitch Fluffy rock-cake, 9 ¾ dress robes I must not tell lies. ' + 
                   'Mudbloods yew pumpkin juice phials Ravenclaw’s Diadem 10 galleons Thieves Downfall. ' + 
                   'Ministry-of-Magic mimubulus mimbletonia Pigwidgeon knut phoenix feather other minister Azkaban. ' +
