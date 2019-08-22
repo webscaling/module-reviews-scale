@@ -45,10 +45,10 @@ npm run live-server
 
 Here are the user stories explored to create this app:
 
-- [ ]As a user, I should be able to see aggregate ratings for the item I am exploring.
-- [ ]As a user, I should be ble to read reviews relevant to the item I am exploring.
-  - [ ]As a user, I should be able to view images attached to these reviews.
-- [ ]As a user, I should be able to write a review, and have the surrounding components update accordingly.
-  - [ ]As a user, I should also be able to submit photos to this review.
-- [ ]As a user, I should be able to mark reviews as helpful.
+- [ ] As a user, I should be able to see aggregate ratings for the item I am exploring.
+- [ ] As a user, I should be ble to read reviews relevant to the item I am exploring.
+  - [ ] As a user, I should be able to view images attached to these reviews.
+- [ ] As a user, I should be able to write a review, and have the surrounding components update accordingly.
+  - [ ] As a user, I should also be able to submit photos to this review.
+- [ ] As a user, I should be able to mark reviews as helpful.
 
