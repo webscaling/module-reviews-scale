@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack -w",
     "server": "nodemon server/server.js",
-    "live-server": "live-server --open=dist/index.html"
+    "live-server": "live-server --open=dist/index.html",
+    "database": "mongod --config /usr/local/etc/mongod.conf"
   },
   "repository": {
     "type": "git",
