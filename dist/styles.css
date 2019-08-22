@@ -1,3 +1,6 @@
-body {
+#rev_container {
   color: red;
+  width: 80vh;
+  height: 80vh;
+  background-color: cadetblue;
 }

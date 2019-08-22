@@ -10,6 +10,7 @@ db.once('open', function() {
 
 const itemSchema = new mongoose.Schema({
     reviewID: Number,
+    itemID: Number,
     author: String,
     rating: Number,
     title: String,
