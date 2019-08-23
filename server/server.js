@@ -1,9 +1,7 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+const bodyParser = require('body-parser');
 const port = 3333;
-
-const bodyParser = require('body-parser')
-
 const Item = require('../db/index.js')
 
 app.use(express.static('dist'))
