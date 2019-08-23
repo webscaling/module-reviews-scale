@@ -1,31 +1,43 @@
 {
-  "name": "react-ing",
+  "name": "module-reviews",
   "version": "1.0.0",
-  "description": "donuts, cats, react, and such",
-  "main": "app.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "react-dev": "webpack --watch",
-    "server-dev": "nodemon server/server.js"
+    "start": "webpack -w",
+    "server": "nodemon server/server.js",
+    "live-server": "live-server --open=dist/index.html",
+    "database": "mongod --config /usr/local/etc/mongod.conf"
   },
-  "author": "Zubair",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shazamazon/module-reviews.git"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shazamazon/module-reviews/issues"
+  },
+  "homepage": "https://github.com/shazamazon/module-reviews#readme",
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "babel": "^6.23.0",
     "babel-loader": "^8.0.6",
-    "react": "^16.8.6",
-    "webpack": "^4.38.0",
-    "webpack-cli": "^3.3.6"
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
     "axios": "^0.19.0",
     "body-parser": "^1.19.0",
+    "eslint": "^6.2.1",
     "express": "^4.17.1",
-    "mysql": "^2.17.1",
-    "nodemon": "^1.19.1",
-    "react-dom": "^16.8.6"
+    "mongoose": "^5.6.10",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   }
 }

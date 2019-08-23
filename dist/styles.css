@@ -1,0 +1,57 @@
+#rev_container {
+  color: black;
+  width: 100%;
+  height: 60vh;
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 8px;
+}
+
+#aggregate_container {
+  width: 300px;
+  border-bottom: 1px solid grey;
+  padding-bottom: 20px;
+}
+
+#rev_overall_stars {
+  width: 50%;
+}
+
+
+#rev_star_container {
+  display: flex;
+}
+
+.rev_rev_container_header {
+  font-size: 21px;
+}
+
+#rev_write_review_holder {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-bottom: 1px solid black;
+}
+
+#rev_share_your_thoughts {
+  margin-bottom: 18px;
+}
+
+.rev_write_review_header {
+  font-size: 17px;
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+
+.rev_leave_review {
+  height: 30px;
+  margin: auto 2px;
+  margin-bottom: 25px;
+  background-image: linear-gradient(rgb(231, 233, 240), rgb(232, 233, 236));
+  border-radius: 4px;
+}
+
+#rev_breakdown_table {
+  padding-top: 10px;
+}
