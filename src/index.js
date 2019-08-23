@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
+import ReviewSummary from './components/ReviewSummary/ReviewSummary.jsx'
+import WriteReview from './components/WriteReview.jsx'
 
 class Hello extends React.Component {
   constructor() {
@@ -9,7 +11,10 @@ class Hello extends React.Component {
 
   render() {
     return (
-      <div id='rev_container'>helo</div>
+      <div id='rev_container'>
+        <ReviewSummary />
+        <WriteReview />
+      </div>
     );
   }
 }
