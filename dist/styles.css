@@ -49,6 +49,7 @@
   margin: auto 2px;
   margin-bottom: 25px;
   background-image: linear-gradient(rgb(231, 233, 240), rgb(232, 233, 236));
+  border-radius: 4px;
 }
 
 #rev_breakdown_table {
