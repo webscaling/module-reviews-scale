@@ -8,11 +8,17 @@ const Review = (props) => {
         <span className={'rev_author'}>Elmo Street</span>
       </div>
       <div className={'rev_rev_rating_stars'}>
-        <div className={'rev_rev_stars'}>*****</div>
+        <div className={'rev_rev_stars'}>
+          <i className={'fas fa-star rev_star'}></i>
+          <i className={'fas fa-star rev_star'}></i>
+          <i className={'fas fa-star rev_star'}></i>
+          <i className={'fas fa-star-half-alt rev_star'}></i>
+          <i className={'far fa-star rev_star'}></i>
+        </div>
         <span className={'rev_rev_title'}>It's pronounced levio-SAH</span>
       </div>
       <span className={'rev_rev_date'}>July 7th, 2019</span>
-      <span>
+      <span className={'rev_rev_text'}>
         Toad-like smile Flourish and Blotts he knew I’d come back 
         Quidditch World Cup. Fat Lady baubles banana fritters fairy lights 
         Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 

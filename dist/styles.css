@@ -84,7 +84,7 @@
   object-fit: cover;
   width: 34px;
   height: 34px;
-  padding-right: 9px;
+  margin-right: 9px;
 }
 
 .rev_pic_title {
@@ -93,16 +93,30 @@
 }
 
 .rev_rev_rating_stars {
+  margin-top: 10px;
   display: flex;
   align-items: center;
 }
 
 .rev_rev_stars {
   padding-right: 9px;
+  color: #ffce00;
+}
+
+.rev_star + .rev_star {
+  margin: auto 1px;
 }
 
 .rev_rev_title {
   font-weight: bold;
+}
+
+.rev_rev_date {
+  margin-top: 5px;
+}
+
+.rev_rev_text {
+  margin-top: 10px;
 }
 
 
