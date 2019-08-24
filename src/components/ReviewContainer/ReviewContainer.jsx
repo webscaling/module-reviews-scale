@@ -9,16 +9,18 @@ const ReviewContainer = (props) => {
         <option value='top_reviews'>Top Reviews</option>
         <option value='most_recent'>Most Recent</option>
       </select>
-      <Review />
-      <Review />
-      <Review />
-      <Review />
-      <Review />
-      <Review />
-      <Review />
-      <Review />
-      <Review />
-      <Review />
+      <div id={'rev_rev_stream'}>
+        <Review />
+        <Review />
+        <Review />
+        <Review />
+        <Review />
+        <Review />
+        <Review />
+        <Review />
+        <Review />
+        <Review />
+      </div>
     </div>
   )
 }
