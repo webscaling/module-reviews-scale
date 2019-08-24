@@ -13,6 +13,12 @@ const ReviewContainer = (props) => {
       <Review />
       <Review />
       <Review />
+      <Review />
+      <Review />
+      <Review />
+      <Review />
+      <Review />
+      <Review />
     </div>
   )
 }

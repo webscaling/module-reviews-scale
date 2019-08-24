@@ -63,7 +63,8 @@
   display: flex;
   flex-direction: column;
   padding-left: 30px;
-  max-height: 
+  max-height: 1640px;
+  overflow: auto;
 }
 
 #rev_sort {
@@ -71,7 +72,38 @@
 }
 
 #rev_review {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 680px;
-  background-color: cadetblue;
-  height: 100px;
+  margin: 20px auto;
 }
+
+.rev_avatar {
+  border-radius: 34px;
+  object-fit: cover;
+  width: 34px;
+  height: 34px;
+  padding-right: 9px;
+}
+
+.rev_pic_title {
+  display: flex;
+  align-items: center;
+}
+
+.rev_rev_rating_stars {
+  display: flex;
+  align-items: center;
+}
+
+.rev_rev_stars {
+  padding-right: 9px;
+}
+
+.rev_rev_title {
+  font-weight: bold;
+}
+
+
+
