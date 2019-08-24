@@ -7,6 +7,11 @@ import ReviewContainer from './components/ReviewContainer/ReviewContainer.jsx'
 class Hello extends React.Component {
   constructor() {
     super();
+
+    this.state = {
+      currentItem: 3333,
+      writeReview: false
+    }
   }
 
 
