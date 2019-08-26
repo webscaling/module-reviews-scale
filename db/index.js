@@ -12,6 +12,7 @@ const itemSchema = new mongoose.Schema({
   reviewID: Number,
   itemID: Number,
   author: String,
+  avatarURL: String,
   rating: Number,
   title: String,
   text: String,
