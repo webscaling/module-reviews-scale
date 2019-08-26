@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Review = (props) => {
-  console.log(props.reviewData)
+  const starMap = new Array(props.reviewData.rating).fill('*')
+  const emptyStarMap = new Array(5 - props.reviewData.rating).fill('*')
+
   return(
     <div id='rev_review'>
       <div className={'rev_pic_title'}>
@@ -10,11 +12,16 @@ const Review = (props) => {
       </div>
       <div className={'rev_rev_rating_stars'}>
         <div className={'rev_rev_stars'}>
-          <i className={'fas fa-star rev_star'}></i>
-          <i className={'fas fa-star rev_star'}></i>
-          <i className={'fas fa-star rev_star'}></i>
-          <i className={'fas fa-star-half-alt rev_star'}></i>
-          <i className={'far fa-star rev_star'}></i>
+          {
+            starMap.map(() => {
+              return <i className={'fas fa-star rev_star'}></i>
+            })
+          }
+          {
+            emptyStarMap.map(() => {
+              return <i className={'far fa-star rev_star'}></i>
+            })
+          }
         </div>
         <span className={'rev_rev_title'}>{props.reviewData.title}</span>
       </div>

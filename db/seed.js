@@ -1,6 +1,8 @@
 const Item = require('./index.js');
 const Neah = require('neah'); //Arnie quote generator
 const neah = new Neah();
+const { CensorSensor } = require('censor-sensor'); //Profanity filter
+const censor = new CensorSensor();
 
 const arniePics = [
   'https://review-pics.s3.amazonaws.com/arnie+pics/arnie1.jpg',
@@ -16,8 +18,8 @@ const seedFakeData = (itemCount) => {
   for(var i = 0; i < itemCount; i++){
     let rating = Math.floor((Math.random() * 5) + 1)
     let itemID = Math.floor((Math.random() * 100) + 1)
-    let ipsum = neah.paragraph();
-    let title = neah.getRandom()
+    let ipsum = censor.cleanProfanity(neah.paragraph());
+    let title = censor.cleanProfanity(neah.getRandom());
     title = title.length > 50 ? title.substring(0,50) + '...' : title;
     let helpful = Math.floor((Math.random() * 32) + 1)
     var singleItem = new Item({
