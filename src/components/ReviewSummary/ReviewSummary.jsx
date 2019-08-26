@@ -61,11 +61,6 @@ const ReviewSummary = (props) => {
                 return <i className={'far fa-star rev_agg_star'}></i>
               })
             }
-            {/* <i className={'fas fa-star rev_agg_star'}></i>
-            <i className={'fas fa-star rev_agg_star'}></i>
-            <i className={'fas fa-star rev_agg_star'}></i>
-            <i className={'fas fa-star-half-alt rev_agg_star'}></i>
-            <i className={'far fa-star rev_agg_star'}></i> */}
           </div>
           <div>{`${avgReviews} out of 5 stars`}</div>
         </div>
