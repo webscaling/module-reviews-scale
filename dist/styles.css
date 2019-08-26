@@ -124,6 +124,7 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 680px;
+  font-size: 13px;
 }
 
 #rev_review + #rev_review {
@@ -205,6 +206,11 @@
 
 #rev_breakdown_table > tr > td {
   padding-bottom: 4px;
+}
+
+.rev_rev_helpfulCount {
+  color: #767676;
+  margin-top: 10px;
 }
 
 
