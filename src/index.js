@@ -10,7 +10,7 @@ class ReviewsApp extends React.Component {
     super();
 
     this.state = {
-      currentItem: 23,
+      currentItem: Math.floor((Math.random() * 100) + 1),
       writeReview: false,
       itemReviews: []
     }
