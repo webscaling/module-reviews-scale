@@ -3,14 +3,14 @@ import React from 'react';
 const ProgressBar = (props) => {
   return(
     <div className={'rev_progress_bar'}>
-      <Filler />
+      <Filler percentage={props.percentage}/>
     </div>
   )
 }
 
 const Filler = (props) => {
   return(
-    <div className={'rev_filler'} style={{width: `60%`}}>
+    <div className={'rev_filler'} style={{width: `${props.percentage}%`}}>
       
     </div>
   )
