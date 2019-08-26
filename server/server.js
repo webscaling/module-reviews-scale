@@ -31,7 +31,6 @@ app.all('/test', (req, res) => {
 
 
 app.all('/seed', (req, res) => {
-  //Seed
   seed(1500);
   res.send('database seed attempted');
 })

@@ -1,10 +1,11 @@
 import React from 'react';
 
 const Review = (props) => {
+  console.log(props.reviewData)
   return(
     <div id='rev_review'>
       <div className={'rev_pic_title'}>
-        <img className={'rev_avatar'} src='https://i.imgflip.com/29s5ao.jpg' />
+        <img className={'rev_avatar'} src={props.reviewData.avatarURL} />
         <span className={'rev_author'}>Elmo Street</span>
       </div>
       <div className={'rev_rev_rating_stars'}>
@@ -15,19 +16,10 @@ const Review = (props) => {
           <i className={'fas fa-star-half-alt rev_star'}></i>
           <i className={'far fa-star rev_star'}></i>
         </div>
-        <span className={'rev_rev_title'}>It's pronounced levio-SAH</span>
+        <span className={'rev_rev_title'}>{props.reviewData.title}</span>
       </div>
       <span className={'rev_rev_date'}>July 7th, 2019</span>
-      <span className={'rev_rev_text'}>
-        Toad-like smile Flourish and Blotts he knew I’d come back 
-        Quidditch World Cup. Fat Lady baubles banana fritters fairy lights 
-        Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 
-        inches of parchment. Head Boy start-of-term banquet Cleansweep Seven 
-        roaring lion hat. Unicorn blood crossbow mars is bright tonight, feast 
-        Norwegian Ridgeback. Come seek us where our voices sound, we cannot sing 
-        above the ground, Ginny Weasley bright red. Fanged frisbees, phoenix 
-        tears good clean match.
-      </span>
+      <span className={'rev_rev_text'}>{props.reviewData.text}</span>
 
     </div>
   )

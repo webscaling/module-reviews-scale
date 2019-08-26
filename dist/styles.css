@@ -169,6 +169,7 @@
 
 .rev_rev_title {
   font-weight: bold;
+  max-width: 80%;
 }
 
 .rev_rev_date {
