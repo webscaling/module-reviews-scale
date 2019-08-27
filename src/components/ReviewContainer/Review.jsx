@@ -1,33 +1,37 @@
 import React from 'react';
 
 const Review = (props) => {
+  const starMap = new Array(props.reviewData.rating).fill('*')
+  const emptyStarMap = new Array(5 - props.reviewData.rating).fill('*')
+
+  //Date
+  const options = { year: 'numeric', month: 'long', day: 'numeric'};
+  const displayDate = new Date(props.reviewData.date).toLocaleDateString('en-US', options)
+
   return(
     <div id='rev_review'>
       <div className={'rev_pic_title'}>
-        <img className={'rev_avatar'} src='https://i.imgflip.com/29s5ao.jpg' />
-        <span className={'rev_author'}>Elmo Street</span>
+        <img className={'rev_avatar'} src={props.reviewData.avatarURL} />
+        <span className={'rev_author'}>{props.reviewData.author}</span>
       </div>
       <div className={'rev_rev_rating_stars'}>
         <div className={'rev_rev_stars'}>
-          <i className={'fas fa-star rev_star'}></i>
-          <i className={'fas fa-star rev_star'}></i>
-          <i className={'fas fa-star rev_star'}></i>
-          <i className={'fas fa-star-half-alt rev_star'}></i>
-          <i className={'far fa-star rev_star'}></i>
+          {
+            starMap.map(() => {
+              return <i className={'fas fa-star rev_star'}></i>
+            })
+          }
+          {
+            emptyStarMap.map(() => {
+              return <i className={'far fa-star rev_star'}></i>
+            })
+          }
         </div>
-        <span className={'rev_rev_title'}>It's pronounced levio-SAH</span>
+        <span className={'rev_rev_title'}>{props.reviewData.title}</span>
       </div>
-      <span className={'rev_rev_date'}>July 7th, 2019</span>
-      <span className={'rev_rev_text'}>
-        Toad-like smile Flourish and Blotts he knew I’d come back 
-        Quidditch World Cup. Fat Lady baubles banana fritters fairy lights 
-        Petrificus Totalus. So thirsty, deluminator firs’ years follow me 12 
-        inches of parchment. Head Boy start-of-term banquet Cleansweep Seven 
-        roaring lion hat. Unicorn blood crossbow mars is bright tonight, feast 
-        Norwegian Ridgeback. Come seek us where our voices sound, we cannot sing 
-        above the ground, Ginny Weasley bright red. Fanged frisbees, phoenix 
-        tears good clean match.
-      </span>
+      <span className={'rev_rev_date'}>{displayDate}</span>
+      <span className={'rev_rev_text'}>{props.reviewData.text}</span>
+      <span className={'rev_rev_helpfulCount'}>{`${props.reviewData.helpfulCount} people found this helpful`}</span>
 
     </div>
   )

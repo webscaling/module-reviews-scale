@@ -14,6 +14,8 @@ class ReviewsApp extends React.Component {
       writeReview: false,
       itemReviews: []
     }
+
+    this.handleSortChange = this.handleSortChange.bind(this);
   }
 
   componentDidMount() {
@@ -28,10 +30,44 @@ class ReviewsApp extends React.Component {
     })
     .then((response) => {
       let newReviews = response.data;
+      let newReviewsSorted = newReviews.slice().sort((a, b) => {
+        return b.helpfulCount - a.helpfulCount;
+      })
       this.setState({
-        itemReviews: newReviews
+        itemReviews: newReviewsSorted
       })
     })
+  }
+
+  sortReviewsByHelpful(){
+    let newReviews = this.state.itemReviews;
+    let newReviewsSorted = newReviews.slice().sort((a, b) => {
+      return b.helpfulCount - a.helpfulCount;
+    })
+    this.setState({
+      itemReviews: newReviewsSorted
+    })
+  }
+
+  sortReviewsByDate() {
+    let newReviews = this.state.itemReviews;
+    let newReviewsSorted = newReviews.slice().sort((a, b) => {
+      let aDate = new Date(a.date);
+      let bDate = new Date(b.date);
+      return bDate - aDate;
+    })
+    this.setState({
+      itemReviews: newReviewsSorted
+    })
+  }
+
+  handleSortChange(event) {
+    if(event.target.value === 'most_recent'){
+      this.sortReviewsByDate();
+    } else if(event.target.value === 'most_recent'){
+      this.sortReviewsByHelpful();
+    }
+
   }
 
 
@@ -42,7 +78,7 @@ class ReviewsApp extends React.Component {
           <ReviewSummary reviewArray={this.state.itemReviews}/>
           <WriteReview />
         </div>
-        <ReviewContainer reviewArray={this.state.itemReviews}/>
+        <ReviewContainer reviewArray={this.state.itemReviews} handleSortChange={this.handleSortChange}/>
       </div>
     );
   }

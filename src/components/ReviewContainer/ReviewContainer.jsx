@@ -5,7 +5,7 @@ const ReviewContainer = (props) => {
   return (
     <div id='rev_reviews_container'>
       <span>{`Showing ${props.reviewArray.length} reviews`}</span>
-      <select id='rev_sort'>
+      <select id='rev_sort' onChange={(e) => props.handleSortChange(e)}>
         <option value='top_reviews'>Top Reviews</option>
         <option value='most_recent'>Most Recent</option>
       </select>

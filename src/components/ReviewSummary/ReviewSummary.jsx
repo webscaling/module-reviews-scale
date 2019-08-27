@@ -16,8 +16,8 @@ const ReviewSummary = (props) => {
     }
   
     props.reviewArray.forEach(review => {
-      ratingTracker[review.rating]++;
       sumReviews += review.rating;
+      ratingTracker[review.rating]++;
     })
   
     let avgReviews = (sumReviews / numReviews).toFixed(1);
@@ -68,16 +68,16 @@ const ReviewSummary = (props) => {
           <tr>
             <td>5 star</td>
             <td>
-              <ProgressBar percentage={percentageOne}/>
+              <ProgressBar percentage={percentageFive}/>
             </td>
-            <td>{percentageOne + '%'}</td>
+            <td>{percentageFive + '%'}</td>
           </tr>
           <tr>
             <td>4 star</td>
             <td>
-              <ProgressBar percentage={percentageTwo}/>
+              <ProgressBar percentage={percentageFour}/>
             </td>
-            <td>{percentageTwo + '%'}</td>
+            <td>{percentageFour + '%'}</td>
           </tr>
           <tr>
             <td>3 star</td>
@@ -89,16 +89,16 @@ const ReviewSummary = (props) => {
           <tr>
             <td>2 star</td>
             <td>
-              <ProgressBar percentage={percentageFour}/>
+              <ProgressBar percentage={percentageTwo}/>
             </td>
-            <td>{percentageFour + '%'}</td>
+            <td>{percentageTwo + '%'}</td>
           </tr>
           <tr>
             <td>1 star</td>
             <td>
-              <ProgressBar percentage={percentageFive}/>
+              <ProgressBar percentage={percentageOne}/>
             </td>
-            <td>{percentageFive + '%'}</td>
+            <td>{percentageOne + '%'}</td>
           </tr>
         </table>
       </div>

@@ -16,6 +16,7 @@ const itemSchema = new mongoose.Schema({
   rating: Number,
   title: String,
   text: String,
+  date: Date,
   helpfulCount: Number
 });
 
