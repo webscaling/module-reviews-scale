@@ -27,7 +27,7 @@ const seedFakeData = (itemCount) => {
 
     let helpful = Math.floor((Math.random() * 32) + 1);
 
-    let randYear = Math.floor((Math.random() * 2) + 2017);
+    let randYear = Math.floor((Math.random() * 3) + 2017);
     let randMonth = Math.floor((Math.random() * 11) + 1);
     let randDay = Math.floor((Math.random() * 27) + 1);
     let randHours = Math.floor((Math.random() * 24) + 0);
