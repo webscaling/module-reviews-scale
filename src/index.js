@@ -72,6 +72,7 @@ class ReviewsApp extends React.Component {
 
 
   render() {
+    console.log(this.state.currentItem)
     return (
       <div id='rev_component_holder'>
         <div id='aggregate_rev_container'>
