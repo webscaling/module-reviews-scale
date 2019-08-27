@@ -4,6 +4,10 @@ const Review = (props) => {
   const starMap = new Array(props.reviewData.rating).fill('*')
   const emptyStarMap = new Array(5 - props.reviewData.rating).fill('*')
 
+  //Date
+  const options = { year: 'numeric', month: 'long', day: 'numeric'};
+  const displayDate = new Date(props.reviewData.date).toLocaleDateString('en-US', options)
+
   return(
     <div id='rev_review'>
       <div className={'rev_pic_title'}>
@@ -25,7 +29,7 @@ const Review = (props) => {
         </div>
         <span className={'rev_rev_title'}>{props.reviewData.title}</span>
       </div>
-      <span className={'rev_rev_date'}>July 7th, 2019</span>
+      <span className={'rev_rev_date'}>{displayDate}</span>
       <span className={'rev_rev_text'}>{props.reviewData.text}</span>
       <span className={'rev_rev_helpfulCount'}>{`${props.reviewData.helpfulCount} people found this helpful`}</span>
 

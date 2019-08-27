@@ -29,16 +29,10 @@ const seedFakeData = (itemCount) => {
 
     let randYear = Math.floor((Math.random() * 2) + 2017);
     let randMonth = Math.floor((Math.random() * 11) + 1);
-    randMonth = randMonth.toString().length === 1 ? '0' + randMonth : randMonth;
     let randDay = Math.floor((Math.random() * 27) + 1);
-    randDay = randDay.toString().length === 1 ? '0' + randDay : randDay;
     let randHours = Math.floor((Math.random() * 24) + 0);
-    randHours = randHours.toString().length === 1 ? '0' + randHours : randHours;
     let randMins = Math.floor((Math.random() * 60) + 0);
-    randMins = randMins.toString().length === 1 ? '0' + randMins : randMins;
-
-    let randDateString = `${randYear}-${randMonth}-${randDay}T${randHours}:${randMins}`
-    let randDate = new Date(randDateString);
+    let randDate = new Date(Date.UTC(randYear, randMonth, randDay, randHours, randMins));
 
     var singleItem = new Item({
         reviewID: i,
