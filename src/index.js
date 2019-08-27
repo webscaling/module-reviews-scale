@@ -28,9 +28,32 @@ class ReviewsApp extends React.Component {
     })
     .then((response) => {
       let newReviews = response.data;
-      this.setState({
-        itemReviews: newReviews
+      let newReviewsSorted = newReviews.slice().sort((a, b) => {
+        return b.helpfulCount - a.helpfulCount;
       })
+      this.setState({
+        itemReviews: newReviewsSorted
+      })
+    })
+  }
+
+  sortReviewsByHelpful(){
+    let newReviews = this.state.itemReviews;
+    let newReviewsSorted = newReviews.slice().sort((a, b) => {
+      return b.helpfulCount - a.helpfulCount;
+    })
+    this.setState({
+      itemReviews: newReviewsSorted
+    })
+  }
+
+  sortReviewsByDate() {
+    let newReviews = this.state.itemReviews;
+    let newReviewsSorted = newReviews.slice().sort((a, b) => {
+      return b.helpfulCount - a.helpfulCount;
+    })
+    this.setState({
+      itemReviews: newReviewsSorted
     })
   }
 

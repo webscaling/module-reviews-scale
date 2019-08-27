@@ -18,12 +18,28 @@ const arniePics = [
 
 const seedFakeData = (itemCount) => {
   for(var i = 0; i < itemCount; i++){
-    let rating = Math.floor((Math.random() * 5) + 1)
-    let itemID = Math.floor((Math.random() * 100) + 1)
+    let rating = Math.floor((Math.random() * 5) + 1);
+    let itemID = Math.floor((Math.random() * 100) + 1);
+
     let ipsum = censor.cleanProfanityIsh(neah.paragraph());
     let title = censor.cleanProfanityIsh(neah.getRandom());
     title = title.length > 50 ? title.substring(0,50) + '...' : title;
-    let helpful = Math.floor((Math.random() * 32) + 1)
+
+    let helpful = Math.floor((Math.random() * 32) + 1);
+
+    let randYear = Math.floor((Math.random() * 2) + 2017);
+    let randMonth = Math.floor((Math.random() * 11) + 1);
+    randMonth = randMonth.toString().length === 1 ? '0' + randMonth : randMonth;
+    let randDay = Math.floor((Math.random() * 27) + 1);
+    randDay = randDay.toString().length === 1 ? '0' + randDay : randDay;
+    let randHours = Math.floor((Math.random() * 24) + 0);
+    randHours = randHours.toString().length === 1 ? '0' + randHours : randHours;
+    let randMins = Math.floor((Math.random() * 60) + 0);
+    randMins = randMins.toString().length === 1 ? '0' + randMins : randMins;
+
+    let randDateString = `${randYear}-${randMonth}-${randDay}T${randHours}:${randMins}`
+    let randDate = new Date(randDateString);
+
     var singleItem = new Item({
         reviewID: i,
         itemID: itemID,
@@ -32,6 +48,7 @@ const seedFakeData = (itemCount) => {
         rating: rating,
         title: title,
         text: ipsum,
+        date: randDate,
         helpfulCount: helpful
         
     });
