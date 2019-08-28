@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 3333;
 const Item = require('../db/index.js');
-const seed = require('../db/seed.js');
+const { seedFakeData, seedFakeDataToMatch } = require('../db/seed.js');
 
 app.use(express.static('dist'))
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -31,7 +31,8 @@ app.all('/test', (req, res) => {
 
 
 app.all('/seed', (req, res) => {
-  seed(1000);
+  seedFakeData(1000);
+  //seedFakeDataToMatch(); Trying to get this to work, please ignore for now
   res.send('database seed attempted');
 })
 

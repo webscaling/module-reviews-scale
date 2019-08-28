@@ -64,7 +64,7 @@ class ReviewsApp extends React.Component {
   handleSortChange(event) {
     if(event.target.value === 'most_recent'){
       this.sortReviewsByDate();
-    } else if(event.target.value === 'most_recent'){
+    } else if(event.target.value === 'top_reviews'){
       this.sortReviewsByHelpful();
     }
 
@@ -72,6 +72,7 @@ class ReviewsApp extends React.Component {
 
 
   render() {
+    console.log(this.state.currentItem)
     return (
       <div id='rev_component_holder'>
         <div id='aggregate_rev_container'>

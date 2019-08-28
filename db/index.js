@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
+const atlasKey = require('./config.js');
+const URI = `mongodb+srv://arohand:${atlasKey}@fec-reviews-z0qjd.mongodb.net/shazamazon-reviews?retryWrites=true&w=majority`
 
-mongoose.connect('mongodb://localhost/shazamazon-reviews', {useNewUrlParser: true});
+mongoose.connect(URI, {useNewUrlParser: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
