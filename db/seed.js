@@ -45,7 +45,6 @@ const seedFakeData = (itemCount) => {
         text: ipsum,
         date: randDate,
         helpfulCount: helpful
-        
     });
     singleItem.save(async (err, item) => {
         if(err) console.error(err);

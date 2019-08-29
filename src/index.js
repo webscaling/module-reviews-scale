@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import ReviewSummary from './components/ReviewSummary/ReviewSummary.jsx'
-import WriteReview from './components/WriteReview.jsx'
+import WriteReviewButton from './components/WriteReviewButton.jsx'
 import ReviewContainer from './components/ReviewContainer/ReviewContainer.jsx'
 import axios from 'axios';
+import ComposeReview from './components/ComposeReview.jsx';
 
 class ReviewsApp extends React.Component {
   constructor() {
@@ -11,7 +12,7 @@ class ReviewsApp extends React.Component {
 
     this.state = {
       currentItem: Math.floor((Math.random() * 100) + 1),
-      writeReview: false,
+      writeReview: !false,
       itemReviews: []
     }
 
@@ -67,19 +68,29 @@ class ReviewsApp extends React.Component {
     } else if(event.target.value === 'top_reviews'){
       this.sortReviewsByHelpful();
     }
+  }
 
+  renderCompose(event){
+    this.setState({
+      writeReview: !this.state.writeReview
+    })
   }
 
 
   render() {
-    console.log(this.state.currentItem)
     return (
       <div id='rev_component_holder'>
         <div id='aggregate_rev_container'>
           <ReviewSummary reviewArray={this.state.itemReviews}/>
-          <WriteReview />
+          { this.state.writeReview ? null : <WriteReviewButton 
+            renderCompose={this.renderCompose.bind(this)}/> }
         </div>
-        <ReviewContainer reviewArray={this.state.itemReviews} handleSortChange={this.handleSortChange}/>
+        {
+          this.state.writeReview ? <ComposeReview /> : 
+          <ReviewContainer 
+            reviewArray={this.state.itemReviews} 
+            handleSortChange={this.handleSortChange}/>
+        }
       </div>
     );
   }
