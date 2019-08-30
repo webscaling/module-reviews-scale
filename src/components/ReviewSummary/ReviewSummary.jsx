@@ -44,8 +44,8 @@ const ReviewSummary = (props) => {
     return (
       <div id='aggregate_container'>
         <h1 class='rev_rev_container_header'>{`${numReviews} Customer Reviews`}</h1>
-        <div id='rev_star_container'>
-          <div id='rev_overall_stars'>
+        <div className='rev_star_container'>
+          <div className='rev_overall_stars'>
             {
               fullStarChart.map(() => {
                 return <i className={'fas fa-star rev_agg_star'}></i>

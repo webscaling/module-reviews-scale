@@ -44,7 +44,7 @@
   padding-bottom: 20px;
 }
 
-#rev_star_container {
+.rev_star_container {
   display: flex;
   align-items: center;
 }
@@ -183,7 +183,7 @@
   margin: auto 1px;
 }
 
-#rev_overall_stars {
+.rev_overall_stars {
   color: #ffce00;
   margin-right: 15px;
 }
@@ -257,4 +257,18 @@
 
 #rev_review_field_holder > label {
   font-weight: bold;
+}
+
+#rev_submit_review {
+  background: #f0c14b;
+  border-color: #a88734 #9c7e31 #846a29;
+  font-weight: bold;
+  height: 30px;
+  width: 80px;
+  align-self: flex-end;
+  border-radius: 5px;
+}
+
+.rev_compose_stars {
+  margin-right: 5px;
 }
