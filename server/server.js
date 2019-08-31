@@ -6,6 +6,7 @@ const Item = require('../db/index.js');
 const { seedFakeData } = require('../db/seed.js');
 const { CensorSensor } = require('censor-sensor');
 const censor = new CensorSensor();
+const mongoose = require('mongoose');
 
 censor.disableTier(4);
 const bannedWords = [
@@ -61,6 +62,18 @@ app.post('/publishReview', (req, res)=> {
     await res.send('post successful');
   });
 });
+
+app.patch('/updateHelpful', (req, res)=> {
+  let newReviewObj = req.body.reviewObj;
+  newReviewObj.helpfulCount++;
+  Item.updateOne({ _id: `${newReviewObj._id}` }, 
+                        { $set: { helpfulCount: newReviewObj.helpfulCount } }, 
+                        (err, result) => {
+                          if(err) console.log(err)
+                          console.log(`review ${newReviewObj._id} marked as helpful`)
+                          res.send()
+                        })
+})
 
 
 app.listen(port, () => console.log(`You get a 5-star rating on port ${port}`))

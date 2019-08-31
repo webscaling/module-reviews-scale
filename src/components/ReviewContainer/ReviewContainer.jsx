@@ -2,7 +2,6 @@ import React from 'react';
 import Review from './Review.jsx'
 
 const ReviewContainer = (props) => {
-  console.log(props)
   return (
     <div id='rev_reviews_container'>
       <span>{`Showing ${props.reviewArray.length} reviews`}</span>
@@ -14,7 +13,8 @@ const ReviewContainer = (props) => {
       <div id={'rev_rev_stream'}>
         {
           props.reviewArray.map((review) => {
-            return <Review reviewData={review}/>
+            return <Review reviewData={review}
+                           handleHelpful={props.handleHelpful}/>
           })
         }
       </div>
