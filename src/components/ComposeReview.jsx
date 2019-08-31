@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios'
 
 class ComposeReview extends React.Component {
 
@@ -6,11 +7,10 @@ class ComposeReview extends React.Component {
     super(props);
 
     this.state = {
-      stars: 4,
       title: '',
       review: '',
       starArray: [false, false, false, false, false],
-      rating: 0
+      rating: 0, 
     }
   }
 
@@ -58,6 +58,21 @@ class ComposeReview extends React.Component {
     })
   }
 
+  submitReview(event, itemID) {
+    event.preventDefault();
+    axios.post('/publishReview', {
+      rating: this.state.rating,
+      title: this.state.title,
+      review: this.state.review,
+      itemID: this.props.currentItem
+    })
+    .then(()=> this.props.flipToReviews())
+  }
+
+  cancelReview(){
+    this.props.flipToReviews(true);
+  }
+
   render() {
     return (
       <div id='rev_compose_container'>
@@ -98,7 +113,13 @@ class ComposeReview extends React.Component {
                     onChange={(e)=> this.collectReview(e)}></textarea>
           <br />
 
-          <button id='rev_submit_review'>Submit</button>
+          <div id='rev_compose_button_container'>
+            <button id='rev_compose_cancel' 
+                    onClick={(e)=> this.cancelReview(e)}>Cancel</button>
+            
+            <button id='rev_submit_review' 
+                    onClick={(e)=> this.submitReview(e)}>Submit</button>
+          </div>
 
         </form>
       </div>

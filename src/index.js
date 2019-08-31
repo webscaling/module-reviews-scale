@@ -11,9 +11,10 @@ class ReviewsApp extends React.Component {
     super();
 
     this.state = {
-      currentItem: Math.floor((Math.random() * 100) + 1),
-      writeReview: !false,
-      itemReviews: []
+      currentItem: 13, //Math.floor((Math.random() * 100) + 1),
+      writeReview: false,
+      itemReviews: [],
+      listOrder: ['Top Reviews', 'Most Recent']
     }
 
     this.handleSortChange = this.handleSortChange.bind(this);
@@ -63,16 +64,26 @@ class ReviewsApp extends React.Component {
   }
 
   handleSortChange(event) {
-    if(event.target.value === 'most_recent'){
+    if(event.target.value === 'Most Recent'){
       this.sortReviewsByDate();
-    } else if(event.target.value === 'top_reviews'){
+    } else if(event.target.value === 'Top Reviews'){
       this.sortReviewsByHelpful();
     }
   }
 
-  renderCompose(event){
+  renderCompose(cancel){
     this.setState({
       writeReview: !this.state.writeReview
+    }, ()=> {
+      if (cancel === undefined) {
+        this.componentDidMount();
+        setTimeout(function() {
+          this.sortReviewsByDate();
+        }.bind(this), 200)
+        this.setState({
+          listOrder: ['Most Recent', 'Top Reviews']
+        })
+      }
     })
   }
 
@@ -86,8 +97,13 @@ class ReviewsApp extends React.Component {
             renderCompose={this.renderCompose.bind(this)}/> }
         </div>
         {
-          this.state.writeReview ? <ComposeReview /> : 
+          this.state.writeReview ? 
+          <ComposeReview 
+            currentItem={this.state.currentItem}
+            flipToReviews={this.renderCompose.bind(this)}/> 
+            : 
           <ReviewContainer 
+            listOrder={this.state.listOrder}
             reviewArray={this.state.itemReviews} 
             handleSortChange={this.handleSortChange}/>
         }

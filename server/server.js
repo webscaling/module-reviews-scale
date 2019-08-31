@@ -3,11 +3,25 @@ const app = express();
 const bodyParser = require('body-parser');
 const port = 3333;
 const Item = require('../db/index.js');
-const { seedFakeData, seedFakeDataToMatch } = require('../db/seed.js');
+const { seedFakeData } = require('../db/seed.js');
+const { CensorSensor } = require('censor-sensor');
+const censor = new CensorSensor();
 
-app.use(express.static('dist'))
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+censor.disableTier(4);
+const bannedWords = [
+  'avada',
+  'kedavra',
+  'imperio',
+  'crucio',
+  'voldemort'
+]
+bannedWords.forEach((word) => {
+  censor.addWord(word);
+})
+
+app.use(express.static('dist'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.all('/seed', (req, res) => {
   seedFakeData(1000);
@@ -25,6 +39,26 @@ app.get('/itemReviews', (req, res) => {
   let queriedItemID = req.query.itemID;
   Item.find({itemID: queriedItemID}, (err, reviews) => {
     res.send(reviews);
+  });
+});
+
+app.post('/publishReview', (req, res)=> {
+  let reviewObj = req.body;
+  let account = 'Guest'
+  let newReview = new Item({
+    itemID: reviewObj.itemID,
+    author: censor.cleanProfanityIsh(account),
+    avatarURL: 'https://media.tenor.com/images/e71dec17746af9d0e3555fbbb9c580f0/raw',
+    rating: reviewObj.rating,
+    title: censor.cleanProfanityIsh(reviewObj.title),
+    text: censor.cleanProfanityIsh(reviewObj.review),
+    date: new Date(),
+    helpfulCount: 0
+  });
+  newReview.save(async (err, item) => {
+    if(err) console.error(err);
+    await console.log(`New review successfully posted from ${newReview.author}`);
+    await res.send('post successful');
   });
 });
 
