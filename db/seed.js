@@ -29,14 +29,14 @@ const seedFakeData = (itemCount) => {
     let helpful = Math.floor((Math.random() * 32) + 1);
 
     let randYear = Math.floor((Math.random() * 3) + 2017);
-    let randMonth = Math.floor((Math.random() * 11) + 1);
+    let monthMax = randYear === 2019 ? 7 : 11;
+    let randMonth = Math.floor((Math.random() * monthMax) + 1);
     let randDay = Math.floor((Math.random() * 27) + 1);
     let randHours = Math.floor((Math.random() * 24) + 0);
     let randMins = Math.floor((Math.random() * 60) + 0);
     let randDate = new Date(Date.UTC(randYear, randMonth, randDay, randHours, randMins));
 
     var singleItem = new Item({
-        reviewID: i,
         itemID: itemID,
         author: 'testAuth',
         avatarURL: arniePics[i % arniePics.length],
@@ -45,7 +45,6 @@ const seedFakeData = (itemCount) => {
         text: ipsum,
         date: randDate,
         helpfulCount: helpful
-        
     });
     singleItem.save(async (err, item) => {
         if(err) console.error(err);
@@ -53,57 +52,6 @@ const seedFakeData = (itemCount) => {
     })
   }
 }
-
-// Trying to get this to work, please ignore for now
-const seedFakeDataToMatch = () => {
-//   let reviewArray = [];
-//   let i = 0;
-//   let review_id = 0;
-//   dummyData.forEach((item) => {
-//     let targetRating = item.Rating;
-    
-//     let currentSum = 0;
-//     let numReviews = 0;
-    
-//     let check = (currentSum / numReviews).toFixed(1);
-
-//     while (check !== targetRating){
-//       let bias;
-
-//       let nextItem = createRandomItem(review_id, item.ProductId, bias)
-//       review_id++;
-//       currentSum += nextItem.rating;
-//       numReviews++;
-//       check = (currentSum / numReviews).toFixed(1);
-
-//       reviewArray.push(nextItem);
-
-//       //if (numReviews > 30){
-//         if(check > targetRating){
-//           bias = 5//Math.floor((Math.random() * 1) + 4);
-//         } else if (check < targetRating) {
-//           bias = 1//Math.floor((Math.random() * 1) + 2);
-//         }
-
-//         if (numReviews > 30) {
-//           console.log('applying the break on: ', item.ProductId,'check: ',  check, 'target: ', item.Rating)
-//           break;
-//         }
-//       //}
-    }
-
-
-
-    
-//   })
-
-  // reviewArray.forEach((singleItem) => {
-  //   singleItem.save(async (err, item) => {
-  //     if(err) console.error(err);
-  //     await console.log(`item id ${item.itemID} was seeded to the database`)        
-  //   })
-  // })
-// }
 
 const createRandomItem = (review_ID, itemID, biasRating) => {
 
@@ -144,11 +92,4 @@ const createRandomItem = (review_ID, itemID, biasRating) => {
 
 }
 
-let newItem = createRandomItem(15, 4)
-//console.log(newItem.rating)
-// newItem.save(async (err, item) => {
-//   if(err) console.error(err);
-//   await console.log(`item id ${item.itemID} was seeded to the database`)        
-// })
-
-module.exports = { seedFakeData, seedFakeDataToMatch };
+module.exports = { seedFakeData };

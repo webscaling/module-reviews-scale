@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import ReviewSummary from './components/ReviewSummary/ReviewSummary.jsx'
-import WriteReview from './components/WriteReview.jsx'
+import WriteReviewButton from './components/WriteReviewButton.jsx'
 import ReviewContainer from './components/ReviewContainer/ReviewContainer.jsx'
 import axios from 'axios';
+import ComposeReview from './components/ComposeReview.jsx';
 
 class ReviewsApp extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      currentItem: Math.floor((Math.random() * 100) + 1),
+      currentItem: 13, //Math.floor((Math.random() * 100) + 1),
       writeReview: false,
-      itemReviews: []
+      itemReviews: [],
+      listOrder: ['Top Reviews', 'Most Recent']
     }
 
     this.handleSortChange = this.handleSortChange.bind(this);
@@ -62,24 +64,49 @@ class ReviewsApp extends React.Component {
   }
 
   handleSortChange(event) {
-    if(event.target.value === 'most_recent'){
+    if(event.target.value === 'Most Recent'){
       this.sortReviewsByDate();
-    } else if(event.target.value === 'top_reviews'){
+    } else if(event.target.value === 'Top Reviews'){
       this.sortReviewsByHelpful();
     }
+  }
 
+  renderCompose(cancel){
+    this.setState({
+      writeReview: !this.state.writeReview
+    }, ()=> {
+      if (cancel === undefined) {
+        this.componentDidMount();
+        setTimeout(function() {
+          this.sortReviewsByDate();
+        }.bind(this), 200)
+        this.setState({
+          listOrder: ['Most Recent', 'Top Reviews']
+        })
+      }
+    })
   }
 
 
   render() {
-    console.log(this.state.currentItem)
     return (
       <div id='rev_component_holder'>
         <div id='aggregate_rev_container'>
           <ReviewSummary reviewArray={this.state.itemReviews}/>
-          <WriteReview />
+          { this.state.writeReview ? null : <WriteReviewButton 
+            renderCompose={this.renderCompose.bind(this)}/> }
         </div>
-        <ReviewContainer reviewArray={this.state.itemReviews} handleSortChange={this.handleSortChange}/>
+        {
+          this.state.writeReview ? 
+          <ComposeReview 
+            currentItem={this.state.currentItem}
+            flipToReviews={this.renderCompose.bind(this)}/> 
+            : 
+          <ReviewContainer 
+            listOrder={this.state.listOrder}
+            reviewArray={this.state.itemReviews} 
+            handleSortChange={this.handleSortChange}/>
+        }
       </div>
     );
   }
