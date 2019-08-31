@@ -26,7 +26,7 @@ const seedFakeData = (itemCount) => {
     let title = censor.cleanProfanityIsh(neah.getRandom());
     title = title.length > 50 ? title.substring(0,50) + '...' : title;
 
-    let helpful = Math.floor((Math.random() * 32) + 1);
+    let helpful = Math.floor((Math.random() * 15) + 1);
 
     let randYear = Math.floor((Math.random() * 3) + 2017);
     let monthMax = randYear === 2019 ? 7 : 11;
@@ -67,7 +67,7 @@ const createRandomItem = (review_ID, itemID, biasRating) => {
   let title = censor.cleanProfanityIsh(neah.getRandom());
   title = title.length > 50 ? title.substring(0,50) + '...' : title;
 
-  let helpful = Math.floor((Math.random() * 32) + 1);
+  let helpful = Math.floor((Math.random() * 15) + 1);
 
   let randYear = Math.floor((Math.random() * 3) + 2017);
   let randMonth = Math.floor((Math.random() * 11) + 1);
