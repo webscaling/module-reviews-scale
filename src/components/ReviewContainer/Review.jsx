@@ -9,7 +9,7 @@ const Review = (props) => {
   const displayDate = new Date(props.reviewData.date).toLocaleDateString('en-US', options)
 
   return(
-    <div id='rev_review'>
+    <div className={'rev_review'}>
       <div className={'rev_pic_title'}>
         <img className={'rev_avatar'} src={props.reviewData.avatarURL} />
         <span className={'rev_author'}>{props.reviewData.author}</span>
@@ -32,6 +32,8 @@ const Review = (props) => {
       <span className={'rev_rev_date'}>{displayDate}</span>
       <span className={'rev_rev_text'}>{props.reviewData.text}</span>
       <span className={'rev_rev_helpfulCount'}>{`${props.reviewData.helpfulCount} people found this helpful`}</span>
+      <button className={'rev_helpful_button'}
+              onClick={()=> props.handleHelpful(props.reviewData)}>Helpful</button>
 
     </div>
   )

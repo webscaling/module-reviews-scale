@@ -11,7 +11,7 @@ class ReviewsApp extends React.Component {
     super();
 
     this.state = {
-      currentItem: 13, //Math.floor((Math.random() * 100) + 1),
+      currentItem: 46, //Math.floor((Math.random() * 100) + 1),
       writeReview: false,
       itemReviews: [],
       listOrder: ['Top Reviews', 'Most Recent']
@@ -87,6 +87,13 @@ class ReviewsApp extends React.Component {
     })
   }
 
+  handleHelpful(review) {
+    console.log(review);
+    axios.patch('/updateHelpful', {
+      reviewObj: review
+    })
+    .then(()=> this.componentDidMount())
+  }
 
   render() {
     return (
@@ -105,7 +112,8 @@ class ReviewsApp extends React.Component {
           <ReviewContainer 
             listOrder={this.state.listOrder}
             reviewArray={this.state.itemReviews} 
-            handleSortChange={this.handleSortChange}/>
+            handleSortChange={this.handleSortChange}
+            handleHelpful={this.handleHelpful.bind(this)}/>
         }
       </div>
     );
