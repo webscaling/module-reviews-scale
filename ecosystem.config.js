@@ -10,7 +10,7 @@ module.exports = {
       key: '~/.ssh/hratx43-FEC-Reviews-Module.pem',
       ref: 'origin/master',
       repo: 'git@github.com:shazamazon/module-reviews.git',
-      path: '/home/ubuntu/module-reviews/server/server.js',
+      path: '/home/ubuntu/',
       'post-deploy': 'npm install && pm2 startOrRestart ecosystem.config.js'
     }
   }
