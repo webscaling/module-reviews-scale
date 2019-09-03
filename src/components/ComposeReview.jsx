@@ -60,7 +60,7 @@ class ComposeReview extends React.Component {
 
   submitReview(event, itemID) {
     event.preventDefault();
-    axios.post('18.212.163.195/publishReview', {
+    axios.post('http://ec2-18-212-163-195.compute-1.amazonaws.com:3333/publishReview', {
       rating: this.state.rating,
       title: this.state.title,
       review: this.state.review,
