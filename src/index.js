@@ -88,7 +88,6 @@ class ReviewsApp extends React.Component {
   }
 
   handleHelpful(review) {
-    console.log(review);
     axios.patch('http://ec2-18-212-163-195.compute-1.amazonaws.com/updateHelpful', {
       reviewObj: review
     })
