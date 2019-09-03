@@ -8,7 +8,8 @@
     "start": "webpack -w",
     "server": "nodemon server/server.js",
     "live-server": "live-server --open=dist/index.html",
-    "database": "mongod --config /usr/local/etc/mongod.conf"
+    "database": "mongod --config /usr/local/etc/mongod.conf",
+    "deploy-pm2": "pm2 deploy ecosystem.config.js production"
   },
   "repository": {
     "type": "git",
