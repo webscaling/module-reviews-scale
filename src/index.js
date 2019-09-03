@@ -25,7 +25,7 @@ class ReviewsApp extends React.Component {
   }
 
   getReviewsForItem(queryItemID) {
-    axios.get('/itemReviews', {
+    axios.get('18.212.163.195/itemReviews', {
       params: {
         itemID: queryItemID
       }
@@ -89,7 +89,7 @@ class ReviewsApp extends React.Component {
 
   handleHelpful(review) {
     console.log(review);
-    axios.patch('/updateHelpful', {
+    axios.patch('18.212.163.195/updateHelpful', {
       reviewObj: review
     })
     .then(()=> this.componentDidMount())
