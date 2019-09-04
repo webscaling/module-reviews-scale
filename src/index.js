@@ -11,10 +11,10 @@ class ReviewsApp extends React.Component {
     super();
 
     this.state = {
-      currentItem: 46, //Math.floor((Math.random() * 100) + 1),
+      currentItem: Math.floor((Math.random() * 100) + 1),
       writeReview: false,
       itemReviews: [],
-      listOrder: ['Top Reviews', 'Most Recent']
+      listOrder: ['Top Reviews', 'Most Recent'],
     }
 
     this.handleSortChange = this.handleSortChange.bind(this);
@@ -22,6 +22,16 @@ class ReviewsApp extends React.Component {
 
   componentDidMount() {
     this.getReviewsForItem(this.state.currentItem)
+    window.addEventListener('clickedProduct', (event) => {
+      let product = event.detail;
+      if(product) {
+        this.setState(
+          {
+            currentItem: product
+          }, ()=> this.getReviewsForItem(this.state.currentItem))
+      }
+    })
+    
   }
 
   getReviewsForItem(queryItemID) {
@@ -31,12 +41,15 @@ class ReviewsApp extends React.Component {
       }
     })
     .then((response) => {
+      let oldReviewsNum = this.state.itemReviews.length;
       let newReviews = response.data;
       let newReviewsSorted = newReviews.slice().sort((a, b) => {
         return b.helpfulCount - a.helpfulCount;
       })
       this.setState({
-        itemReviews: newReviewsSorted
+        itemReviews: newReviewsSorted,
+      }, ()=> {
+        if(newReviews.length > oldReviewsNum) this.sendReviewEvent(newReviewsSorted);
       })
     })
   }
@@ -88,11 +101,31 @@ class ReviewsApp extends React.Component {
   }
 
   handleHelpful(review) {
-    console.log(review);
     axios.patch('http://ec2-18-212-163-195.compute-1.amazonaws.com/updateHelpful', {
       reviewObj: review
     })
     .then(()=> this.componentDidMount())
+  }
+
+  sendReviewEvent(reviews = this.state.itemReviews) {
+
+    let sumReviews = 0;
+    let numReviews = reviews.length;
+
+    reviews.forEach(review => {
+      sumReviews += review.rating;
+    });
+  
+    let avgReviews = Number((sumReviews / numReviews).toFixed(1));
+
+    let event = new CustomEvent('reviewUpdate', {
+      detail: {
+        numReviews: reviews.length,
+        reviewsAvg: avgReviews
+      }
+    })
+
+    window.dispatchEvent(event);
   }
 
   render() {
@@ -107,7 +140,8 @@ class ReviewsApp extends React.Component {
           this.state.writeReview ? 
           <ComposeReview 
             currentItem={this.state.currentItem}
-            flipToReviews={this.renderCompose.bind(this)}/> 
+            flipToReviews={this.renderCompose.bind(this)}
+            sendReviewEvent={this.sendReviewEvent.bind(this)}/> 
             : 
           <ReviewContainer 
             listOrder={this.state.listOrder}
