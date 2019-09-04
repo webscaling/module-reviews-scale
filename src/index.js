@@ -14,7 +14,7 @@ class ReviewsApp extends React.Component {
       currentItem: 33, //Math.floor((Math.random() * 100) + 1),
       writeReview: false,
       itemReviews: [],
-      listOrder: ['Top Reviews', 'Most Recent']
+      listOrder: ['Top Reviews', 'Most Recent'],
     }
 
     this.handleSortChange = this.handleSortChange.bind(this);
@@ -41,12 +41,15 @@ class ReviewsApp extends React.Component {
       }
     })
     .then((response) => {
+      let oldReviewsNum = this.state.itemReviews.length;
       let newReviews = response.data;
       let newReviewsSorted = newReviews.slice().sort((a, b) => {
         return b.helpfulCount - a.helpfulCount;
       })
       this.setState({
-        itemReviews: newReviewsSorted
+        itemReviews: newReviewsSorted,
+      }, ()=> {
+        if(newReviews.length > oldReviewsNum) this.sendReviewEvent(newReviewsSorted);
       })
     })
   }
@@ -104,6 +107,28 @@ class ReviewsApp extends React.Component {
     .then(()=> this.componentDidMount())
   }
 
+  sendReviewEvent(reviews = this.state.itemReviews) {
+
+    let sumReviews = 0;
+    let numReviews = reviews.length;
+
+    reviews.forEach(review => {
+      sumReviews += review.rating;
+    });
+  
+    let avgReviews = Number((sumReviews / numReviews).toFixed(1));
+
+    let event = new CustomEvent('reviewUpdate', {
+      detail: {
+        numReviews: reviews.length,
+        reviewsAvg: avgReviews
+      }
+    })
+
+    window.dispatchEvent(event);
+    console.log(event)
+  }
+
   render() {
     return (
       <div id='rev_component_holder'>
@@ -116,7 +141,8 @@ class ReviewsApp extends React.Component {
           this.state.writeReview ? 
           <ComposeReview 
             currentItem={this.state.currentItem}
-            flipToReviews={this.renderCompose.bind(this)}/> 
+            flipToReviews={this.renderCompose.bind(this)}
+            sendReviewEvent={this.sendReviewEvent.bind(this)}/> 
             : 
           <ReviewContainer 
             listOrder={this.state.listOrder}
