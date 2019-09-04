@@ -126,7 +126,6 @@ class ReviewsApp extends React.Component {
     })
 
     window.dispatchEvent(event);
-    console.log(event)
   }
 
   render() {
