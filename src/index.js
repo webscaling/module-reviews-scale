@@ -11,7 +11,7 @@ class ReviewsApp extends React.Component {
     super();
 
     this.state = {
-      currentItem: Math.floor((Math.random() * 100) + 1),
+      currentItem: 66, //Math.floor((Math.random() * 100) + 1),
       writeReview: false,
       itemReviews: [],
       listOrder: ['Top Reviews', 'Most Recent'],
