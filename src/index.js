@@ -112,8 +112,17 @@ class ReviewsApp extends React.Component {
     let sumReviews = 0;
     let numReviews = reviews.length;
 
+    let ratingTracker = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0
+    }
+
     reviews.forEach(review => {
       sumReviews += review.rating;
+      ratingTracker[review.rating]++;
     });
   
     let avgReviews = Number((sumReviews / numReviews).toFixed(1));
@@ -121,10 +130,11 @@ class ReviewsApp extends React.Component {
     let event = new CustomEvent('reviewUpdate', {
       detail: {
         numReviews: reviews.length,
-        reviewsAvg: avgReviews
+        reviewsAvg: avgReviews,
+        reviewBreakdown: ratingTracker
       }
     });
-
+    
     window.dispatchEvent(event);
   }
 
