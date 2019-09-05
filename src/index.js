@@ -123,7 +123,7 @@ class ReviewsApp extends React.Component {
         numReviews: reviews.length,
         reviewsAvg: avgReviews
       }
-    })
+    });
 
     window.dispatchEvent(event);
   }
