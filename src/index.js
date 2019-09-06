@@ -134,8 +134,9 @@ class ReviewsApp extends React.Component {
         reviewBreakdown: ratingTracker
       }
     });
-    
-    window.dispatchEvent(event);
+    setTimeout(() => {
+      window.dispatchEvent(event);
+    }, 1000)
   }
 
   render() {
