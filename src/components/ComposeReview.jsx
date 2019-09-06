@@ -104,7 +104,8 @@ class ComposeReview extends React.Component {
 
           <label>Add a headline</label>
           <br />
-          <input onChange={(e)=> this.collectTitle(e)}></input>
+          <input className={'rev_input'} 
+                 onChange={(e)=> this.collectTitle(e)}></input>
           <br />
 
           <label>Write your review</label>

@@ -42,7 +42,7 @@ const ReviewSummary = (props) => {
     const emptyStarChart = new Array(numEmptyStars).fill('*');
     
     return (
-      <div id='aggregate_container'>
+      <div id='rev_aggregate_container'>
         <h1 class='rev_rev_container_header'>{`${numReviews} Customer Reviews`}</h1>
         <div className='rev_star_container'>
           <div className='rev_overall_stars'>
