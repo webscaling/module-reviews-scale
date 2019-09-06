@@ -49,7 +49,7 @@ class ReviewsApp extends React.Component {
       this.setState({
         itemReviews: newReviewsSorted,
       }, ()=> {
-        if(newReviews.length > oldReviewsNum) this.sendReviewEvent(newReviewsSorted);
+        this.sendReviewEvent(newReviewsSorted);
       })
     })
   }
