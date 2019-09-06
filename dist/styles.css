@@ -312,3 +312,48 @@
   border-color: #e77600;
   box-shadow: 0 0 3px 2px rgba(228,121,17,.5);
 }
+
+@media only screen and (max-width: 600px) {
+  #rev_component_holder {
+    flex-direction: column;
+    /* align-items: center; */
+  }
+
+  #rev_reviews_container {
+    max-width: 300px;
+    padding: 0;
+  }
+
+  .rev_review {
+    width: auto;
+  }
+
+  .rev_rev_rating_stars {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rev_rev_text {
+
+  }
+
+  #aggregate_rev_container {
+    width: 100px;
+    height: 50vh;
+  }
+
+  #rev_rev_stream {
+    overflow: visible;
+  }
+
+  .rev_star_container {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    height: 45px;
+    justify-content: space-between;
+  }
+
+  .rev_progress_bar {
+    width: 120px;
+  }
+}
