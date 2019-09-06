@@ -137,7 +137,7 @@ class ReviewsApp extends React.Component {
     setTimeout(() => {
       console.log(event);
       window.dispatchEvent(event);
-    }, 1000)
+    }, 500)
   }
 
   render() {
