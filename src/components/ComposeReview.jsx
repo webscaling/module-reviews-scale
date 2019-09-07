@@ -60,13 +60,26 @@ class ComposeReview extends React.Component {
 
   submitReview(event, itemID) {
     event.preventDefault();
-    axios.post('http://ec2-18-212-163-195.compute-1.amazonaws.com/publishReview', {
-      rating: this.state.rating,
-      title: this.state.title,
-      review: this.state.review,
-      itemID: this.props.currentItem
-    })
-    .then(()=> this.props.flipToReviews())
+
+    let review = this.state.review;
+    if(this.state.title !== '' && review.length >= 10 && this.rating !== 0){
+      axios.post('http://ec2-18-212-163-195.compute-1.amazonaws.com/publishReview', {
+        rating: this.state.rating,
+        title: this.state.title,
+        review: this.state.review,
+        itemID: this.props.currentItem
+      })
+      .then(()=> this.props.flipToReviews())
+    } else {
+      console.log(review.length)
+      if(this.state.rating === 0){
+        alert('Please provide a rating');
+      } else if(this.state.title === ''){
+        alert('Please title your review');
+      } else if(review.length < 10){
+        alert('Reviews must be more than 10 characters long');
+      }
+    }
   }
 
   cancelReview(){

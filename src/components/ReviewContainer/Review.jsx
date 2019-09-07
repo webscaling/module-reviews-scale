@@ -33,7 +33,13 @@ const Review = (props) => {
       <span className={'rev_rev_text'}>{props.reviewData.text}</span>
       <span className={'rev_rev_helpfulCount'}>{`${props.reviewData.helpfulCount} people found this helpful`}</span>
       <button className={'rev_helpful_button'}
-              onClick={()=> props.handleHelpful(props.reviewData)}>Helpful</button>
+              onClick={()=> props.handleHelpful(props.reviewData)}>
+              {
+                !props.reviewData.foundHelpful.includes('guest')
+                ? 'Helpful'
+                : 'Rescind'
+              }
+              </button>
 
     </div>
   )
