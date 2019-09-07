@@ -45,7 +45,16 @@ app.get('/get-reviews', (req, res) => {
 
 app.get('/itemReviews', (req, res) => {
   let queriedItemID = req.query.itemID;
+  let queryUser = req.query.user;
   Item.find({itemID: queriedItemID}, (err, reviews) => {
+    //Sanitizing response to remove data from other users
+    reviews.forEach(review => {
+      if(review.foundHelpful.includes(queryUser)){
+        review.foundHelpful = [queryUser]
+      } else {
+        review.foundHelpful = [];
+      }
+    })
     res.send(reviews);
   });
 });
@@ -80,7 +89,7 @@ app.patch('/updateHelpful', async (req, res)=> {
     helpfulArray = result.foundHelpful;
     helpfulSet = new Set(helpfulArray);
     helpfulArray = Array.from(helpfulSet);
-    
+
     if(helpfulArray.includes(user)) {
       newReviewObj.helpfulCount--;
       helpfulArray.splice(helpfulArray.indexOf(user), 1);
