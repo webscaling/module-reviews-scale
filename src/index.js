@@ -15,7 +15,9 @@ class ReviewsApp extends React.Component {
       writeReview: false,
       itemReviews: [],
       listOrder: ['Top Reviews', 'Most Recent'],
-      sort: 'top'
+      sort: 'top',
+      allowHelpfulChange: true,
+      currentUser: 'guest'
     }
 
     this.handleSortChange = this.handleSortChange.bind(this);
@@ -36,9 +38,10 @@ class ReviewsApp extends React.Component {
   }
 
   getReviewsForItem(queryItemID) {
-    axios.get('http://ec2-18-212-163-195.compute-1.amazonaws.com/itemReviews', {
+    axios.get('/itemReviews', {
       params: {
-        itemID: queryItemID
+        itemID: queryItemID,
+        user: this.state.currentUser
       }
     })
     .then((response) => {
@@ -110,11 +113,22 @@ class ReviewsApp extends React.Component {
   }
 
   handleHelpful(review) {
-    axios.patch('http://ec2-18-212-163-195.compute-1.amazonaws.com/updateHelpful', {
-      reviewObj: review,
-      user: 'guest'
-    })
-    .then(()=> this.getReviewsForItem(this.state.currentItem))
+    if(this.state.allowHelpfulChange){
+      axios.patch('http://ec2-18-212-163-195.compute-1.amazonaws.com/updateHelpful', {
+        reviewObj: review,
+        user: 'guest'
+      })
+      .then(()=> this.getReviewsForItem(this.state.currentItem))
+      // multiple successive calls to the helpful endpoint mess up tracking
+      // due to async issues, even with server-side handling. Here, we are
+      // handling it client-side as well
+      .then(() => {
+        this.setState({allowHelpfulChange: !this.state.allowHelpfulChange});
+        setTimeout(() => {
+          this.setState({allowHelpfulChange: !this.state.allowHelpfulChange});
+        }, 1000)
+      })
+    }
   }
 
   sendReviewEvent(reviews = this.state.itemReviews) {
