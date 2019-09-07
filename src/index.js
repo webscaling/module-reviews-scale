@@ -15,6 +15,7 @@ class ReviewsApp extends React.Component {
       writeReview: false,
       itemReviews: [],
       listOrder: ['Top Reviews', 'Most Recent'],
+      sort: 'top'
     }
 
     this.handleSortChange = this.handleSortChange.bind(this);
@@ -41,7 +42,6 @@ class ReviewsApp extends React.Component {
       }
     })
     .then((response) => {
-      let oldReviewsNum = this.state.itemReviews.length;
       let newReviews = response.data;
       let newReviewsSorted = newReviews.slice().sort((a, b) => {
         return b.helpfulCount - a.helpfulCount;
@@ -50,6 +50,7 @@ class ReviewsApp extends React.Component {
         itemReviews: newReviewsSorted,
       }, ()=> {
         this.sendReviewEvent(newReviewsSorted);
+        if(this.state.sort === 'recent') this.sortReviewsByDate();
       })
     })
   }
@@ -60,7 +61,8 @@ class ReviewsApp extends React.Component {
       return b.helpfulCount - a.helpfulCount;
     })
     this.setState({
-      itemReviews: newReviewsSorted
+      itemReviews: newReviewsSorted,
+      sort: 'top'
     })
   }
 
@@ -72,7 +74,8 @@ class ReviewsApp extends React.Component {
       return bDate - aDate;
     })
     this.setState({
-      itemReviews: newReviewsSorted
+      itemReviews: newReviewsSorted,
+      sort: 'recent'
     })
   }
 
@@ -84,11 +87,11 @@ class ReviewsApp extends React.Component {
     }
   }
 
-  renderCompose(cancel){
+  renderCompose(cancelWasPressed){
     this.setState({
       writeReview: !this.state.writeReview
     }, ()=> {
-      if (cancel === undefined) {
+      if (cancelWasPressed === undefined) {
         this.componentDidMount();
         setTimeout(function() {
           this.sortReviewsByDate();
@@ -96,6 +99,12 @@ class ReviewsApp extends React.Component {
         this.setState({
           listOrder: ['Most Recent', 'Top Reviews']
         })
+      } else {
+        if(this.state.sort === 'recent'){
+          this.setState({
+            listOrder: ['Most Recent', 'Top Reviews']
+          })
+        }
       }
     })
   }
@@ -104,7 +113,7 @@ class ReviewsApp extends React.Component {
     axios.patch('http://ec2-18-212-163-195.compute-1.amazonaws.com/updateHelpful', {
       reviewObj: review
     })
-    .then(()=> this.componentDidMount())
+    .then(()=> this.getReviewsForItem(this.state.currentItem))
   }
 
   sendReviewEvent(reviews = this.state.itemReviews) {
@@ -135,7 +144,6 @@ class ReviewsApp extends React.Component {
       }
     });
     setTimeout(() => {
-      console.log(event);
       window.dispatchEvent(event);
     }, 500)
   }
