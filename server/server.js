@@ -78,6 +78,9 @@ app.patch('/updateHelpful', async (req, res)=> {
     if (err) console.log(err);
 
     helpfulArray = result.foundHelpful;
+    helpfulSet = new Set(helpfulArray);
+    helpfulArray = Array.from(helpfulSet);
+    
     if(helpfulArray.includes(user)) {
       newReviewObj.helpfulCount--;
       helpfulArray.splice(helpfulArray.indexOf(user), 1);
@@ -94,7 +97,7 @@ app.patch('/updateHelpful', async (req, res)=> {
                         } }, 
                         (err, result) => {
                           if(err) console.log(err);
-                          
+
                           console.log(`review ${newReviewObj._id} updated`)
                           res.send()
                         })
