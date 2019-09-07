@@ -38,7 +38,7 @@ class ReviewsApp extends React.Component {
   }
 
   getReviewsForItem(queryItemID) {
-    axios.get('/itemReviews', {
+    axios.get('http://ec2-18-212-163-195.compute-1.amazonaws.com/itemReviews', {
       params: {
         itemID: queryItemID,
         user: this.state.currentUser
