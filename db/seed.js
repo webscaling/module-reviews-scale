@@ -101,7 +101,8 @@ const createRandomItem = (review_ID, itemID, biasRating) => {
       title: title,
       text: ipsum,
       date: randDate,
-      helpfulCount: helpful
+      helpfulCount: helpful,
+      foundHelpful: []
   });
 
   return singleItem;

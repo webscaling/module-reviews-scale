@@ -11,7 +11,7 @@ class ReviewsApp extends React.Component {
     super();
 
     this.state = {
-      currentItem: 66, //Math.floor((Math.random() * 100) + 1),
+      currentItem: 38, //Math.floor((Math.random() * 100) + 1),
       writeReview: false,
       itemReviews: [],
       listOrder: ['Top Reviews', 'Most Recent'],
@@ -111,7 +111,8 @@ class ReviewsApp extends React.Component {
 
   handleHelpful(review) {
     axios.patch('http://ec2-18-212-163-195.compute-1.amazonaws.com/updateHelpful', {
-      reviewObj: review
+      reviewObj: review,
+      user: 'guest'
     })
     .then(()=> this.getReviewsForItem(this.state.currentItem))
   }

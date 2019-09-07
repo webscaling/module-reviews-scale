@@ -19,7 +19,8 @@ const itemSchema = new mongoose.Schema({
   title: String,
   text: String,
   date: Date,
-  helpfulCount: Number
+  helpfulCount: Number,
+  foundHelpful: Array
 });
 
 var Item = mongoose.model('reviews', itemSchema);
