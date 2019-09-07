@@ -31,14 +31,14 @@
   font-family: Amazon Ember;
 }
 
-#aggregate_rev_container {
+#rev_aggregate_rev_container {
   color: black;
   height: 60vh;
   font-size: 13px;
   padding: 8px;
 }
 
-#aggregate_container {
+#rev_aggregate_container {
   width: 300px;
   border-bottom: 1px solid grey;
   padding-bottom: 20px;
@@ -316,7 +316,7 @@
 @media only screen and (max-width: 600px) {
   #rev_component_holder {
     flex-direction: column;
-    /* align-items: center; */
+    align-items: center;
     
   }
 
@@ -324,6 +324,7 @@
     max-width: 300px;
     padding: 0;
     padding-left: 8px;
+    align-items: center;
   }
 
   .rev_review {
@@ -335,12 +336,12 @@
     align-items: flex-start;
   }
 
-  .rev_rev_text {
-
+  .rev_rev_text, .rev_rev_title {
+    max-width: 80vw;
+    overflow: hidden;
   }
 
   #aggregate_rev_container {
-    width: 100px;
     height: 50vh;
     font-size: 10px;
   }
@@ -349,7 +350,15 @@
     overflow: visible;
   }
 
+  #aggregate_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
+  #rev_write_review_holder {
+    align-items: center;
+  }
 
   .rev_star_container {
     flex-direction: column-reverse;
@@ -358,46 +367,22 @@
     justify-content: space-between;
   }
 
-  .rev_progress_bar {
-    width: 120px;
+  #rev_compose_container {
+    padding-left: 0;
+    width: auto;
+    margin-top: -130px;
   }
 
-  .rev_rev_container_header {
-    font-size: 14px;
-    margin-bottom: 2px;
+  .rev_star_container.rev_rev_stars {
+    flex-direction: row;
   }
 
-  .rev_write_review_header {
-    font-size: 12px;
+  #rev_review_field_holder {
+    height: 400px;
   }
 
-  .rev_leave_review {
-    visibility: hidden;
+  #rev_review_body, .rev_input {
+    border: 1px solid black;
   }
-
-  .rev_leave_review:after {
-    visibility: visible;
-    content:'goodbye';
-    width: 100px;
-    font-size: 10px;
-    height: 30px;
-    margin: auto 2px;
-    margin-bottom: 25px;
-    border-radius: 4px;
-    background: #e7e9ec;
-    border-radius: 3px;
-    border-color: #ADB1B8 #A2A6AC #8D9096;
-    border-style: solid;
-    border-width: 1px;
-    cursor: pointer;
-    font-weight: bold;
-    background-image: linear-gradient(to top, rgb(218, 218, 218) 16%, rgb(247, 245, 245) 79%); 
-}
-
-  /* Comment this out! */
-  body {
-    margin: 0;
-  }
-
 
 }
