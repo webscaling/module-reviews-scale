@@ -7,7 +7,7 @@ const ReviewContainer = (props) => {
       <span>{`Showing ${props.reviewArray.length} reviews`}</span>
       <select id='rev_sort' onChange={(e) => props.handleSortChange(e)}>
         {props.listOrder.map((orderType)=> {
-          return <option value={orderType}>{orderType}</option>
+          return <option label={orderType} value={orderType}>{orderType}</option>
         })}
       </select>
       <div id={'rev_rev_stream'}>
