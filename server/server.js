@@ -70,14 +70,32 @@ app.post('/publishReview', (req, res)=> {
   });
 });
 
-app.patch('/updateHelpful', (req, res)=> {
+app.patch('/updateHelpful', async (req, res)=> {
+  let user = req.body.user;
   let newReviewObj = req.body.reviewObj;
-  newReviewObj.helpfulCount++;
-  Item.updateOne({ _id: `${newReviewObj._id}` }, 
-                        { $set: { helpfulCount: newReviewObj.helpfulCount } }, 
+  let helpfulArray = [];
+  await Item.findOne({ _id: `${newReviewObj._id}` }, (err, result) => {
+    if (err) console.log(err);
+
+    helpfulArray = result.foundHelpful;
+    if(helpfulArray.includes(user)) {
+      newReviewObj.helpfulCount--;
+      helpfulArray.splice(helpfulArray.indexOf(user), 1);
+    } else {
+      newReviewObj.helpfulCount++;
+      helpfulArray.push(user);
+    }
+    console.log(helpfulArray)
+  })
+  await Item.updateOne({ _id: `${newReviewObj._id}` }, 
+                        { $set: { 
+                          helpfulCount: newReviewObj.helpfulCount,
+                          foundHelpful: helpfulArray
+                        } }, 
                         (err, result) => {
-                          if(err) console.log(err)
-                          console.log(`review ${newReviewObj._id} marked as helpful`)
+                          if(err) console.log(err);
+                          
+                          console.log(`review ${newReviewObj._id} updated`)
                           res.send()
                         })
 })
