@@ -16,7 +16,8 @@ const ReviewContainer = (props) => {
         {
           props.reviewArray.map((review) => {
             return <Review reviewData={review}
-                           handleHelpful={props.handleHelpful}/>
+                           handleHelpful={props.handleHelpful}
+                           currentUser={props.currentUser}/>
           })
         }
       </div>

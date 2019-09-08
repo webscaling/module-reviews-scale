@@ -36,7 +36,7 @@ const Review = (props) => {
               aria-label='Mark review as helpful or rescind your helpful vote after a button is clicked'
               onClick={()=> props.handleHelpful(props.reviewData)}>
               {
-                !props.reviewData.foundHelpful.includes('guest')
+                !props.reviewData.foundHelpful.includes(props.currentUser)
                 ? 'Helpful'
                 : 'Rescind'
               }
