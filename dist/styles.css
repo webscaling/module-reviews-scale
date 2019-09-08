@@ -315,7 +315,10 @@
 
 #rev_access_stars {
   visibility: hidden;
-  display: none;
+}
+
+.rev_aria_hidden {
+  visibility: hidden;
 }
 
 @media only screen and (max-width: 600px) {
