@@ -55,24 +55,34 @@ Here are the user stories explored to create this app:
 - [X] As a user, I should be able to mark reviews as helpful and remove these votes.
 - [X] As a user dependent on screen dictation, I should be able to navigate this app. 
 
+
+##Accessibility
+
+This was my first attempt at making a site fully accessible, and the module to my assessment does meet ARIA and WAVE standards.
+
+For submitting reviews in voiceover, there is a separate, hidden module that will allow your to select between one and five stars as buttons. There are also several custom aria labels. 
+
+If you have suggestions on how accessibility can be improved, please message me. 
+
+
 ##Dependencies
 
-"axios": "^0.19.0",
-"body-parser": "^1.19.0",
-"censor-sensor": "^1.0.4",
-"eslint": "^6.2.1",
-"express": "^4.17.1",
-"mongoose": "^5.6.10",
-"neah": "^1.0.2",
-"react": "^16.9.0",
-"react-dom": "^16.9.0"
+- axios: ^0.19.0
+- body-parser: ^1.19.0
+- censor-sensor: ^1.0.4
+- eslint: ^6.2.1
+- express: ^4.17.1
+- mongoose: ^5.6.10
+- neah: ^1.0.2
+- react: ^16.9.0
+- react-dom: ^16.9.0
 
 Developer:
 
-"@babel/core": "^7.5.5",
-"@babel/preset-env": "^7.5.5",
-"@babel/preset-react": "^7.0.0",
-"babel-loader": "^8.0.6",
-"webpack": "^4.39.2",
-"webpack-cli": "^3.3.7",
-"webpack-dev-server": "^3.8.0"
+- @babel/core: ^7.5.5
+- @babel/preset-env: ^7.5.5
+- @babel/preset-react: ^7.0.0
+- babel-loader: ^8.0.6
+- webpack: ^4.39.2
+- webpack-cli: ^3.3.7
+- webpack-dev-server: ^3.8.0
