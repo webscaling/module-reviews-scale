@@ -82,6 +82,13 @@ class ComposeReview extends React.Component {
     }
   }
 
+  submitReviewAccess(event) {
+    event.preventDefault();
+    let eventID = event.target.id;
+    let rating = Number(eventID[eventID.length - 1]);
+    this.setState({rating: rating});
+  }
+
   cancelReview(){
     this.props.flipToReviews(true);
   }
@@ -126,6 +133,15 @@ class ComposeReview extends React.Component {
           <textarea id='rev_review_body'
                     onChange={(e)=> this.collectReview(e)}></textarea>
           <br />
+
+          <div id='rev_access_stars'>
+            <label>Select a Rating</label>
+            <button id='rev_access_1' onClick={(e)=> this.submitReviewAccess(e)}>One Star</button>
+            <button id='rev_access_2' onClick={(e)=> this.submitReviewAccess(e)}>Two Stars</button>
+            <button id='rev_access_3' onClick={(e)=> this.submitReviewAccess(e)}>Three Stars</button>
+            <button id='rev_access_4' onClick={(e)=> this.submitReviewAccess(e)}>Four Stars</button>
+            <button id='rev_access_5' onClick={(e)=> this.submitReviewAccess(e)}>Five Stars</button>
+          </div>
 
           <div id='rev_compose_button_container'>
             <button id='rev_compose_cancel' 
