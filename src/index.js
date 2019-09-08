@@ -165,7 +165,7 @@ class ReviewsApp extends React.Component {
 
   render() {
     return (
-      <div id='rev_component_holder'>
+      <div id='rev_component_holder' role='main'>
         <div id='rev_aggregate_rev_container'>
           <ReviewSummary reviewArray={this.state.itemReviews}/>
           { this.state.writeReview ? null : <WriteReviewButton 
