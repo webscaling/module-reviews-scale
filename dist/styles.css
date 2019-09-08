@@ -313,6 +313,10 @@
   box-shadow: 0 0 3px 2px rgba(228,121,17,.5);
 }
 
+#rev_access_stars {
+  visibility: hidden;
+}
+
 @media only screen and (max-width: 600px) {
   #rev_component_holder {
     flex-direction: column;
@@ -339,6 +343,7 @@
   .rev_rev_text, .rev_rev_title {
     max-width: 80vw;
     overflow: hidden;
+    font-size: 14px;
   }
 
   #aggregate_rev_container {
@@ -375,6 +380,10 @@
 
   .rev_star_container.rev_rev_stars {
     flex-direction: row;
+  }
+
+  .rev_rev_stars {
+    margin-bottom: 8px;
   }
 
   #rev_review_field_holder {
