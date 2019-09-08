@@ -56,7 +56,7 @@ Here are the user stories explored to create this app:
 - [X] As a user dependent on screen dictation, I should be able to navigate this app. 
 
 
-##Accessibility
+## Accessibility
 
 This was my first attempt at making a site fully accessible, and the module to my assessment does meet ARIA and WAVE standards.
 
@@ -65,7 +65,7 @@ For submitting reviews in voiceover, there is a separate, hidden module that wil
 If you have suggestions on how accessibility can be improved, please message me. 
 
 
-##Dependencies
+## Dependencies
 
 - axios: ^0.19.0
 - body-parser: ^1.19.0
