@@ -61,10 +61,9 @@ app.get('/itemReviews', (req, res) => {
 
 app.post('/publishReview', (req, res)=> {
   let reviewObj = req.body;
-  let account = 'Guest'
   let newReview = new Item({
     itemID: reviewObj.itemID,
-    author: censor.cleanProfanityIsh(account),
+    author: censor.cleanProfanityIsh(reviewObj.author),
     avatarURL: 'https://media.tenor.com/images/e71dec17746af9d0e3555fbbb9c580f0/raw',
     rating: reviewObj.rating,
     title: censor.cleanProfanityIsh(reviewObj.title),
