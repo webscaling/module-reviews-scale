@@ -67,7 +67,8 @@ class ComposeReview extends React.Component {
         rating: this.state.rating,
         title: this.state.title,
         review: this.state.review,
-        itemID: this.props.currentItem
+        itemID: this.props.currentItem,
+        author: this.props.currentUser
       })
       .then(()=> this.props.flipToReviews())
     } else {

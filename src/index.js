@@ -17,7 +17,7 @@ class ReviewsApp extends React.Component {
       listOrder: ['Top Reviews', 'Most Recent'],
       sort: 'top',
       allowHelpfulChange: true,
-      currentUser: 'guest'
+      currentUser: 'Zubair'
     }
 
     this.handleSortChange = this.handleSortChange.bind(this);
@@ -116,7 +116,7 @@ class ReviewsApp extends React.Component {
     if(this.state.allowHelpfulChange){
       axios.patch('http://ec2-18-212-163-195.compute-1.amazonaws.com/updateHelpful', {
         reviewObj: review,
-        user: 'guest'
+        user: this.state.currentUser
       })
       .then(()=> this.getReviewsForItem(this.state.currentItem))
       // multiple successive calls to the helpful endpoint mess up tracking
@@ -176,7 +176,8 @@ class ReviewsApp extends React.Component {
           <ComposeReview 
             currentItem={this.state.currentItem}
             flipToReviews={this.renderCompose.bind(this)}
-            sendReviewEvent={this.sendReviewEvent.bind(this)}/> 
+            sendReviewEvent={this.sendReviewEvent.bind(this)}
+            currentUser={this.state.currentUser}/> 
             : 
           <ReviewContainer 
             listOrder={this.state.listOrder}
