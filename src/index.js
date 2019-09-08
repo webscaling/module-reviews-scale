@@ -183,7 +183,8 @@ class ReviewsApp extends React.Component {
             listOrder={this.state.listOrder}
             reviewArray={this.state.itemReviews} 
             handleSortChange={this.handleSortChange}
-            handleHelpful={this.handleHelpful.bind(this)}/>
+            handleHelpful={this.handleHelpful.bind(this)}
+            currentUser={this.state.currentUser}/>
         }
       </div>
     );
