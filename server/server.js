@@ -5,20 +5,20 @@ const port = 3333;
 const Item = require('../db/index.js');
 const { seedFakeData } = require('../db/seed.js');
 const { CensorSensor } = require('censor-sensor');
-const censor = new CensorSensor();
+// const censor = new CensorSensor();
 const mongoose = require('mongoose');
 
-censor.disableTier(4);
-const bannedWords = [
-  'avada',
-  'kedavra',
-  'imperio',
-  'crucio',
-  'voldemort'
-]
-bannedWords.forEach((word) => {
-  censor.addWord(word);
-})
+// censor.disableTier(4);
+// // const bannedWords = [
+//   'avada',
+//   'kedavra',
+//   'imperio',
+//   'crucio',
+//   'voldemort'
+// ]
+// bannedWords.forEach((word) => {
+//   censor.addWord(word);
+// })
 
 app.use(express.static('dist'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,7 +32,7 @@ app.use(function(req, res, next) {
 });
 
 app.all('/seed', (req, res) => {
-  seedFakeData(1000);
+  seedFakeData(500000);
   res.send('database seed attempted');
 });
 
@@ -63,11 +63,11 @@ app.post('/publishReview', (req, res)=> {
   let reviewObj = req.body;
   let newReview = new Item({
     itemID: reviewObj.itemID,
-    author: censor.cleanProfanityIsh(reviewObj.author),
+    author: reviewObj.author,
     avatarURL: 'https://media.tenor.com/images/e71dec17746af9d0e3555fbbb9c580f0/raw',
     rating: reviewObj.rating,
-    title: censor.cleanProfanityIsh(reviewObj.title),
-    text: censor.cleanProfanityIsh(reviewObj.review),
+    title: reviewObj.title,
+    text: reviewObj.review,
     date: new Date(),
     helpfulCount: 0
   });

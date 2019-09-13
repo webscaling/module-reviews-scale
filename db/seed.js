@@ -1,11 +1,14 @@
-const Item = require('./index.js');
+const { ItemModel } = require('./index.js');
 const Neah = require('neah'); //Arnie quote generator
 const neah = new Neah();
+const faker = require('faker');
 const { CensorSensor } = require('censor-sensor'); //Profanity filter
-const censor = new CensorSensor();
+// const censor = new CensorSensor();
 const dummyData = require('./dummydata');
+const timerFn = require('timer-node');
+const timer = timerFn('test-timer');
 
-censor.disableTier(4);
+// censor.disableTier(4);
 
 const characters = [
   { name: 'Harry Potter', image: 'https://imgix.ranker.com/user_node_img/137/2729278/original/harry-potter-u18?w=87&h=87&fit=crop&crop=faces&q=60&fm=pjpg' },
@@ -29,84 +32,109 @@ const characters = [
   { name: 'Quentin Coldwater', image: 'https://images.8tracks.com/cover/i/012/299/650/Screenshot_16-2095.png?rect=81,0,516,516&q=98&fm=jpg&fit=max' },
   { name: 'Zatanna', image: 'https://imgix.ranker.com/user_node_img/122/2437988/original/zatanna-comic-book-characters-photo-u13?w=87&h=87&fit=crop&crop=faces&q=60&fm=pjpg' },
   { name: 'Thaddeus Bradley', image: 'https://imgix.ranker.com/user_node_img/3683/73653603/original/thaddeus-bradley-fictional-characters-photo-u1?w=87&h=87&fit=crop&crop=faces&q=60&fm=pjpg' },
-]
+];
+
+let count = 0;
 
 const seedFakeData = (itemCount) => {
-  for(var i = 0; i < itemCount; i++){
+  // timer.start();
+  let revArr = [];
+  for (var i = 1; i < itemCount + 1; i++) {
     let rating = Math.floor((Math.random() * 5) + 1);
-    let itemID = Math.floor((Math.random() * 100) + 1);
+    let itemID = Math.floor((Math.random() * 10000000) + 1);
 
-    let ipsum = censor.cleanProfanityIsh(neah.paragraph());
-    let title = censor.cleanProfanityIsh(neah.getRandom());
-    title = title.length > 50 ? title.substring(0,50) + '...' : title;
+    let ipsum = neah.paragraph();
+    let title = neah.getRandom();
+    // title = title.length > 50 ? title.substring(0,50) + '...' : title;
 
     let helpful = Math.floor((Math.random() * 15) + 1);
 
-    let randYear = Math.floor((Math.random() * 3) + 2017);
-    let monthMax = randYear === 2019 ? 7 : 11;
-    let randMonth = Math.floor((Math.random() * monthMax) + 1);
-    let randDay = Math.floor((Math.random() * 27) + 1);
-    let randHours = Math.floor((Math.random() * 24) + 0);
-    let randMins = Math.floor((Math.random() * 60) + 0);
-    let randDate = new Date(Date.UTC(randYear, randMonth, randDay, randHours, randMins));
+    // let randYear = Math.floor((Math.random() * 3) + 2017);
+    // let monthMax = randYear === 2019 ? 7 : 11;
+    // let randMonth = Math.floor((Math.random() * monthMax) + 1);
+    // let randDay = Math.floor((Math.random() * 27) + 1);
+    // let randHours = Math.floor((Math.random() * 24) + 0);
+    // let randMins = Math.floor((Math.random() * 60) + 0);
+    let randDate = faker.fake('{{date.recent}}');
 
-    let randChar = characters[Math.floor((Math.random() * characters.length))]
+    let randChar = characters[Math.floor((Math.random() * characters.length))];
 
-    var singleItem = new Item({
-        itemID: itemID,
-        author: randChar.name,
-        avatarURL: randChar.image,
-        rating: rating,
-        title: title,
-        text: ipsum,
-        date: randDate,
-        helpfulCount: helpful
-    });
-    singleItem.save(async (err, item) => {
-        if(err) console.error(err);
-        await console.log(`item id ${item.itemID} was seeded to the database`)        
-    })
-  }
-}
-
-const createRandomItem = (review_ID, itemID, biasRating) => {
-
-  let rating;
-  if(biasRating === undefined) {
-    rating = Math.floor((Math.random() * 5) + 1);
-  } else {
-    rating = biasRating;
-  }
-  //let itemID = Math.floor((Math.random() * 100) + 1);
-
-  let ipsum = censor.cleanProfanityIsh(neah.paragraph());
-  let title = censor.cleanProfanityIsh(neah.getRandom());
-  title = title.length > 50 ? title.substring(0,50) + '...' : title;
-
-  let helpful = Math.floor((Math.random() * 15) + 1);
-
-  let randYear = Math.floor((Math.random() * 3) + 2017);
-  let randMonth = Math.floor((Math.random() * 11) + 1);
-  let randDay = Math.floor((Math.random() * 27) + 1);
-  let randHours = Math.floor((Math.random() * 24) + 0);
-  let randMins = Math.floor((Math.random() * 60) + 0);
-  let randDate = new Date(Date.UTC(randYear, randMonth, randDay, randHours, randMins));
-
-  var singleItem = new Item({
-      reviewID: review_ID,
+    var singleItem = new ItemModel({
       itemID: itemID,
-      author: 'testAuth',
-      avatarURL: arniePics[review_ID % arniePics.length],
+      author: randChar.name,
+      avatarURL: randChar.image,
       rating: rating,
       title: title,
       text: ipsum,
       date: randDate,
-      helpfulCount: helpful,
-      foundHelpful: []
-  });
-
-  return singleItem;
-
-}
-
+      helpfulCount: helpful
+    });
+    revArr.push({insertOne: singleItem});
+  }
+  
+  ItemModel.bulkWrite(revArr)
+    .then(() => {
+      if (count < 3) {
+        seedFakeData(500000);
+        console.log('Complete count: ' + count);
+        count++;
+      }
+    })
+    .catch((err) => {
+      if (err) { console.log(err); }
+    });
+    
+  // timer.end();
+  // console.log(timer.ms());
+  // singleItem.save(async (err, item) => {
+  //     if(err) console.error(err);
+  //     await console.log(`item id ${item.itemID} was seeded to the database`)        
+  // });
+};
+    
+seedFakeData(500000);
+    
 module.exports = { seedFakeData };
+
+
+
+
+// const createRandomItem = (review_ID, itemID, biasRating) => {
+
+//   let rating;
+//   if(biasRating === undefined) {
+//     rating = Math.floor((Math.random() * 5) + 1);
+//   } else {
+//     rating = biasRating;
+//   }
+//   //let itemID = Math.floor((Math.random() * 100) + 1);
+
+//   let ipsum = neah.paragraph();
+//   let title = neah.getRandom();
+//   title = title.length > 50 ? title.substring(0,50) + '...' : title;
+
+//   let helpful = Math.floor((Math.random() * 15) + 1);
+
+//   let randYear = Math.floor((Math.random() * 3) + 2017);
+//   let randMonth = Math.floor((Math.random() * 11) + 1);
+//   let randDay = Math.floor((Math.random() * 27) + 1);
+//   let randHours = Math.floor((Math.random() * 24) + 0);
+//   let randMins = Math.floor((Math.random() * 60) + 0);
+//   let randDate = new Date(Date.UTC(randYear, randMonth, randDay, randHours, randMins));
+
+//   var singleItem = new Item({
+//     reviewID: review_ID,
+//     itemID: itemID,
+//     author: 'testAuth',
+//     avatarURL: arniePics[review_ID % arniePics.length],
+//     rating: rating,
+//     title: title,
+//     text: ipsum,
+//     date: randDate,
+//     helpfulCount: helpful,
+//     foundHelpful: []
+//   });
+
+//   return singleItem;
+
+// };

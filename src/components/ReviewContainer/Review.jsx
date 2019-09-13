@@ -6,9 +6,9 @@ const Review = (props) => {
 
   //Date
   const options = { year: 'numeric', month: 'long', day: 'numeric'};
-  const displayDate = new Date(props.reviewData.date).toLocaleDateString('en-US', options)
+  const displayDate = props.reviewData.date;
 
-  return(
+  return (
     <div className={'rev_review'}>
       <div className={'rev_pic_title'}>
         <img className={'rev_avatar'} src={props.reviewData.avatarURL} />

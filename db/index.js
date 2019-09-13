@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const atlasKey = require('./config.js');
-const URI = `mongodb+srv://arohand:${atlasKey}@fec-reviews-z0qjd.mongodb.net/shazamazon-reviews?retryWrites=true&w=majority`
+// const atlasKey = require('./config.js');
+const URI = `mongodb://localhost/modules-review?retryWrites=true&w=majority`
 
 mongoose.connect(URI, {useNewUrlParser: true});
 
@@ -23,6 +23,6 @@ const itemSchema = new mongoose.Schema({
   foundHelpful: Array
 });
 
-var Item = mongoose.model('reviews', itemSchema);
+const ItemModel = mongoose.model('reviews', itemSchema);
 
-module.exports = Item;
+module.exports = { ItemModel };
